@@ -4,4 +4,4 @@ Directory details:
 
 ## python
 
-    Codes submitted for Scientific Computing with Python
+Codes submitted for Scientific Computing with Python
