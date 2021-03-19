@@ -10,9 +10,6 @@ def arithmetic_arranger(lists, answer = False):
   if len(lists) > 5:
     return("Error: Too many problems.")
 
-  # TODO print out the equation without argument
-  # TODO print out the equation with argument
-
   # go through the list individually
   for list in lists:
     first_number, operator, second_number = list.split()
@@ -43,11 +40,13 @@ def arithmetic_arranger(lists, answer = False):
     # the longest with is the maximum between the 2 numbers + 2 spaces
     longest_width = 2 + max(len(first_number), len(second_number))
 
+    # arrange the printing in lines
     top_string += first_number.rjust(longest_width) + trailing_spaces
     bottom_string += operator + second_number.rjust(longest_width - 1) + trailing_spaces
     dashes_string += "".rjust(longest_width, "-") + trailing_spaces
     answer_string += sum.rjust(longest_width) + trailing_spaces
 
+  # determine how to print the output based on the argument given
   if answer:
     return(top_string + "\n" + bottom_string + "\n" + dashes_string + "\n" + answer_string)
   else:
