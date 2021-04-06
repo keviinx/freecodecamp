@@ -1,18 +1,24 @@
 class Category:
 
+    # initialize
+    def __init__(self, category):
+        # set the category
+        self.category = category
+        # init the ledger as empty list
+        self.ledger = []
+
     # accepts an amount and description.
     # If no description is given, it should default to an empty spring.
     # Should append an object to the ledger list in the form of {"amount": amount, "description": description}.
-    def deposit(amount, description = ""):
-        # TODO append based on the requirement
-        pass
+    def deposit(self, amount, description = ""):
+        self.ledger.append({"amount": amount, "description": description})
 
     # similar to deposit method, but the amount passed in should be stored in the ledger as a negative number.
     # If there are not enough funds, nothing should be added to the ledger.
     # This method should return True if the withdrawal took place, and False otherwise.
     def withdraw(amount, description = ""):
-        # TODO append based on the requirement
-        pass
+        withdrawal_took_place = False
+        return withdrawal_took_place
 
     # method that returns the current balance of the budget category based on the deposits and withdrawals that have occurred.
     def get_balance():
