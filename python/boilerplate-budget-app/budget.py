@@ -55,8 +55,18 @@ class Category:
 
     # budget object is printed based on README requirement
     def __str__(self):
-        #TODO
-        pass
+        # A title line of 30 characters where the name of the category is centered in a line of `*` characters.
+        output = self.category.center(30, "*") + "\n"
+        # A list of the items in the ledger. 
+        # Each line should show the description and amount. 
+        for item in self.ledger:
+            # The first 23 characters of the description should be displayed, then the amount. 
+            description = item["description"][:23].ljust(23)
+            # The amount should be right aligned, contain two decimal places, and display a maximum of 7 characters.
+            amount = f'{item["amount"]:7.2f}'
+            output += f'{description + amount}\n'
+        output += f'Total: {self.get_balance()}'
+        return output
 
 
 def create_spend_chart(categories):
