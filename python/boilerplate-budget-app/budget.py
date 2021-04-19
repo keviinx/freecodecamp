@@ -37,9 +37,9 @@ class Category:
         # If amount is enough
         if self.check_funds(amount):
             # withdraw from self
-            self.withdraw(amount, "Transfer to " + budget_category.name.capitalize())
+            self.withdraw(amount, "Transfer to " + budget_category.category.capitalize())
             # deposit into another budget category
-            budget_category.deposit(amount, "Transfer from " + self.name.capitalize())
+            budget_category.deposit(amount, "Transfer from " + self.category.capitalize())
             # set transfer took place to true
             transfer_took_place = True
         return transfer_took_place
@@ -48,9 +48,9 @@ class Category:
     # It returns False if the amount is greater than the balance of the budget category and returns True otherwise.
     # This method should be used by both the withdraw method and transfer method.
     def check_funds(self, amount):
-        amount_is_lesser = False
+        amount_is_lesser = True
         if amount > self.get_balance():
-            amount_is_lesser = True
+            amount_is_lesser = False
         return amount_is_lesser
 
     # budget object is printed based on README requirement
