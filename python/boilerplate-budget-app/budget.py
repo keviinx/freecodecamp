@@ -68,14 +68,46 @@ class Category:
 # Besides the `Category` class, create a function (outside of the class) called `create_spend_chart` that takes a list of categories as an argument. 
 # It should return a string that is a bar chart.
 
-# The chart should show the percentage spent in each category passed in to the function. 
-# The percentage spent should be calculated only with withdrawals and not with deposits. 
-# Down the left side of the chart should be labels 0 - 100. 
-# The "bars" in the bar chart should be made out of the "o" character. 
-# The height of each bar should be rounded down to the nearest 10. 
-# The horizontal line below the bars should go two spaces past the final bar. 
 # Each category name should be written vertically below the bar. 
-# There should be a title at the top that says "Percentage spent by category".
+
 def create_spend_chart(categories):
-    #TODO
-    pass
+# There should be a title at the top that says "Percentage spent by category".
+    output = "Percentage spent by category\n"
+    for i in range(100, -10, -10):
+        # Down the left side of the chart should be labels 0 - 100.
+        # first empty space if not 100
+        first_empty_space = " " if i != 100 else ""
+        # second empty space if 0
+        second_empty_space = " " if i == 0 else ""
+        output += first_empty_space + second_empty_space + str(i) + "|"
+        # The chart should show the percentage spent in each category passed in to the function. 
+        # The percentage spent should be calculated only with withdrawals and not with deposits.
+        total_spending = sum(category.ledger[0]["amount"] - category.get_balance() for category in categories)
+        # loop to print the bars
+        for category in categories:
+            # only the first category has 1 space, others have 2 spaces
+            number_of_spaces = 1 if category is categories[0] else 2
+            output += number_of_spaces * " "
+            spending = category.ledger[0]["amount"] - category.get_balance()
+            # The "bars" in the bar chart should be made out of the "o" character.
+            # The height of each bar should be rounded down to the nearest 10.
+            output += "o" if (round(spending/total_spending, 2) * 100 >= i) else " "
+
+        output += 2 * " " + "\n"
+    # The horizontal line below the bars should go two spaces past the final bar.
+    output += (4 * " ") + (((len(categories) * 3) + 1) * "-")
+    # get the longest name in categories
+    category_name_height = max(len(category.category) for category in categories)
+    for j in range(category_name_height):
+        # newline at the beginning
+        output += "\n"
+        # 2 spaces at the beginning of the line
+        for category in categories:
+            # only the first category has 5 spaces, others have 2
+            number_of_spaces = 5 if category is categories[0] else 2
+            # set the alphabet if not longer than the category name
+            alphabet = category.category[j] if len(category.category) > j else " "
+            output += number_of_spaces * " " + alphabet
+        # two extra spaces at the end
+        output += 2 * " "
+    return output
