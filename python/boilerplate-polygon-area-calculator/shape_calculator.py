@@ -19,7 +19,11 @@ class Rectangle:
 
     # Returns perimeter (2 * width + 2 * height)
     def get_perimeter(self):
-        return (2 * self.width + 2* self.height)
+        return (2 * self.width + 2 * self.height)
+
+    # Returns diagonal ((width ** 2 + height ** 2) ** .5)
+    def get_diagonal(self):
+        return ((self.width ** 2 + self.height ** 2) ** .5)
 
 class Square(Rectangle):
     pass
